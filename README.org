@@ -1,0 +1,40 @@
+#+TITLE: Auth Practice
+/A repository to practice writing auth in Rails/
+* Steps for Auth
+** Create Rails project
+1. Start the thing (with Postgres)
+2. Add important gems
+   - ~better_errors~
+   - ~binding_of_caller~
+   - ~pry-rails~
+   - ~annotatre~
+3. Bundle install
+** Create Users model
+1. ~rails g model User~
+2. Write & run the migration
+3. Write the model
+** Create Users views & controller
+*** Important methods
+1. ~self.find_by_credentials(username, password)~
+2. ~set_activation_token~
+3. ~password=~
+4. ~is_password?~
+5. ~reset_session_token!~
+6. ~ensure_session_token~
+** Create Session views & controller
+*** Methods
+1. ~create~
+2. ~destroy~
+3. ~new~
+** Update Application Controller
+*** Important methods
+1. ~current_user~
+2. ~logged_in?~
+3. ~log_in(user)~
+4. ~require_user!~
+* Gotchas
+* Things to memorize
+** Generating a unique token
+~SecureRandom.urlsafe_base64(16)~
+** BCrypt Stuff
+~BCrypt::Password~
