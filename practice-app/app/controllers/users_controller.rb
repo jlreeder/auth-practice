@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :ensure_logged_in, only: [:edit, :update, :destroy]
+
   def index
     @users = User.all
     render json: @users
@@ -27,7 +29,12 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
-    render :edit
+    if @user == current_user
+      render :edit
+    else
+      flash[:errors] = ["You can only edit your own page"]
+      redirect_to user_url(current_user)
+    end
   end
 
   def update
