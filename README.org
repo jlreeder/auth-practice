@@ -8,19 +8,28 @@
    - ~binding_of_caller~
    - ~pry-rails~
    - ~annotatre~
+   - ~bcrypt~ (there by default but commented out)
 3. Bundle install
 ** Create Users model
 1. ~rails g model User~
 2. Write & run the migration
 3. Write the model
-** Create Users views & controller
 *** Important methods
+**** General
 1. ~self.find_by_credentials(username, password)~
-2. ~set_activation_token~
-3. ~password=~
-4. ~is_password?~
-5. ~reset_session_token!~
-6. ~ensure_session_token~
+**** Password
+2. ~password=~
+3. ~is_password?~
+**** Session Token
+1. ~generate_session_token~
+1. ~set_session_token~
+2. ~reset_session_token!~
+3. ~ensure_session_token~
+** Quickly test
+Create a new user in pry
+** Create Users views & controller
+*** Also remember
+1. Set up errors
 ** Create Session views & controller
 *** Methods
 1. ~create~
@@ -32,9 +41,14 @@
 2. ~logged_in?~
 3. ~log_in(user)~
 4. ~require_user!~
+** Nice additions
+1. Show login, signup, and log out buttons
+2. Ensure login for certain actions
 * Gotchas
 * Things to memorize
 ** Generating a unique token
 ~SecureRandom.urlsafe_base64(16)~
 ** BCrypt Stuff
 ~BCrypt::Password~
+* Things to double check
+- Deleting users
