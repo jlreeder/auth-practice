@@ -15,7 +15,8 @@ class UsersController < ApplicationController
       login!(@user)
       redirect_to user_url(@user)
     else
-      render text: "Failure: invalid params"
+      flash.now[:errors] = ["Invalid params: either username in use or password below 6 chars"]
+      render :new
     end
   end
 
