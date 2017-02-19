@@ -1,0 +1,27 @@
+<% if action == :edit %>
+    <% action_url = user_url %>
+    <% method = "patch" %>
+    <% button_name = "Submit Change" %>
+<% else %>
+    <% action_url = users_url %>
+    <% method = "post" %>
+    <% button_name = "Create" %>
+<% end %>
+
+<h2><%= action.capitalize %> User Form</h2>
+<form action="<%= action_url %>" method="post">
+    <input type="hidden" name="_method" method="<%= method %>">
+    <input type="hidden"
+           name="authenticity_token"
+           method="<%= form_authenticity_token %>">
+    <label for="user[username]">Username: </label>
+    <input type="text" name="user[username]" value="<%= @user.username %>">
+    <br>
+    <label for="user[password]">Password: </label>
+    <input type="password" name="user[password]">
+    <br>
+    <%= button_to button_name, action_url, method: method %>
+    <% if action == :edit %>
+        <%= button_to "Delete User", user_url, method: "delete" %>
+    <% end %>
+</form>
