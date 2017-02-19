@@ -1,14 +1,29 @@
 class SessionsController < ApplicationController
-  def create
-    
+  def new
+    @user = User.new
+    render :new
   end
 
-  def new
-    
+  def create
+    username, password = session_params.values
+    @user = User.find_by_credentials(username, password)
+    if @user
+      login!(@user)
+      redirect_to user_url(@user)
+    else
+      render text: "Failure"
+    end
   end
 
   def destroy
-    
+    logout!
+    redirect_to new_session_url
+  end
+
+  private
+
+  def session_params
+    params.require(:session).permit(:username, :password)
   end
 end
 

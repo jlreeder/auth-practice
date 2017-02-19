@@ -12,6 +12,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+      login!(@user)
       redirect_to user_url(@user)
     else
       render text: "Failure: invalid params"
@@ -20,7 +21,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    render json: @user
+    render :show
   end
 
   def edit
